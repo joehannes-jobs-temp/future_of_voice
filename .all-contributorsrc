@@ -1,0 +1,22 @@
+{
+  "projectName": "firmenjubilaeum",
+  "projectOwner": "joehannes",
+  "files": [
+    "readme.md"
+  ],
+  "imageSize": 100,
+  "commit": false,
+  "contributors": [
+    {
+      "login": "joehannes",
+      "name": "Johannes Neugschwentner",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/22868432?v=3",
+      "profile": "https://github.com/joehannes",
+      "contributions": [
+        "code",
+        "doc",
+        "infra"
+      ]
+    }
+  ]
+}
