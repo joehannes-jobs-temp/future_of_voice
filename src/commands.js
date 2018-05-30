@@ -97,9 +97,9 @@ export function calc(DB: any) {
           total++;
           this.log(`${cust.id}: ${_d}km`);
         }
-        return { ...cust, d: _d };
+        return Object.assign({}, cust, { d: _d });
       });
-      DB.setItem('customers', customers);
+      DB.setItem('customers', JSON.stringify(customers));
       this.log('----------------------');
       this.log(`Total within max of ${d}km: ${total} client(s)!!!`);
       callback();
