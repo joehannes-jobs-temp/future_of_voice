@@ -70,6 +70,11 @@ export function print(DB: any) {
       customers = JSON.parse(DB.getItem('customers'));
     } catch (e) {}
 
+    customers.sort((a, b) => {
+      if (a.id < b.id) return -1;
+      else if (a.id > b.id) return 1;
+      return 0;
+    });
     customers.forEach(c => {
       if (typeof c.d !== 'undefined') {
         this.log(`Client: ${c.id}, D: ${c.d}km`);
