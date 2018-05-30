@@ -25,6 +25,11 @@ function bootstrap() {
       help: 'Prints the customers IDs and distances',
       action: CMDs.print(CLI.localStorage),
     },
+    {
+      symbol: 'calc',
+      help: 'Calculate the distances to home',
+      action: CMDs.calc(CLI.localStorage),
+    },
   ]);
 }
 

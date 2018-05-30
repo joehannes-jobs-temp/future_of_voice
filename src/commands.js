@@ -2,6 +2,7 @@
 
 import { openFile, readFile } from './input';
 import { integrityCheck } from './helpers';
+import greatCircle from './calculate';
 
 export function handleFile(DB: any) {
   let customers = [];
@@ -63,8 +64,45 @@ export function print(DB: any) {
     try {
       customers = JSON.parse(DB.getItem('customers'));
     } catch (e) {}
-
-    this.log(customers);
+    customers.forEach(c => {
+      if (typeof c.d !== 'undefined') {
+        this.log(`Client: ${c.id}, D: ${c.d}km`);
+      } else {
+        this.log(`Client: ${c.id}, lat: ${c.lat}, long: ${c.long}`);
+      }
+    });
     callback();
+  };
+}
+
+export function calc(DB: any) {
+  return function (args: {}, callback: () => void): void {
+    let customers = [];
+    try {
+      customers = JSON.parse(DB.getItem('customers'));
+    } catch (e) {}
+    let total = 0;
+
+    this.prompt([
+      {
+        type: 'input',
+        name: 'distance',
+        message: 'Enter max distance in km: ',
+      },
+    ]).then(result => {
+      const d = Number(result.distance);
+      customers.map(cust => {
+        const _d = greatCircle(cust);
+        if (_d <= d) {
+          total++;
+          this.log(`${cust.id}: ${_d}km`);
+        }
+        return { ...cust, d: _d };
+      });
+      DB.setItem('customers', customers);
+      this.log('----------------------');
+      this.log(`Total within max of ${d}km: ${total} client(s)!!!`);
+      callback();
+    });
   };
 }

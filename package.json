@@ -23,6 +23,7 @@
     "dist"
   ],
   "dependencies": {
+    "babel-preset-stage-0": "^6.24.1",
     "event-stream": "^3.3.4",
     "fs": "0.0.1-security",
     "os": "^0.1.1",
@@ -33,6 +34,7 @@
     "babel-cli": "^6.26.0",
     "babel-eslint": "^8.0.1",
     "babel-plugin-add-module-exports": "^0.2.1",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-preset-env": "^1.6.0",
     "babel-preset-flow": "^6.23.0",
     "commitizen": "^2.9.6",

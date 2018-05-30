@@ -18,10 +18,11 @@
         "functions": "never"
       }
     ],
-    "no-plusplus": ["error", { "allowForLoopAfterthoughts": true }],
     "strict": "off",
     "func-names": "off",
     "no-underscore-dangle": "off",
-    "no-empty": "off"
+    "no-empty": "off",
+    "no-plusplus": "off",
+    "no-mixed-operators": "off"
   }
 }

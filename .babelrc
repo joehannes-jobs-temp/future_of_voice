@@ -1,11 +1,13 @@
 {
   "presets": [
-    ["env", {
-      "targets": { "node": 4 }
-    }],
+    [
+      "env",
+      {
+        "targets": { "node": 4 }
+      }
+    ],
+    "stage-0",
     "flow"
   ],
-  "plugins": [
-    "add-module-exports"
-  ]
+  "plugins": ["add-module-exports", "transform-object-rest-spread"]
 }
