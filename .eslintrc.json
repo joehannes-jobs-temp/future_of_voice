@@ -23,6 +23,7 @@
     "no-underscore-dangle": "off",
     "no-empty": "off",
     "no-plusplus": "off",
-    "no-mixed-operators": "off"
+    "no-mixed-operators": "off",
+    "no-restricted-globals": "off"
   }
 }

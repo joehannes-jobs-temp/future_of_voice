@@ -1,16 +1,16 @@
 /* @flow */
 
 import { openFile, readFile } from './input';
-import { integrityCheck } from './helpers';
+import { integrityCheck, coordinateCheck } from './helpers';
 import greatCircle from './calculate';
 
 export function handleFile(DB: any) {
-  let customers = [];
-  try {
-    customers = JSON.parse(DB.getItem('customers'));
-  } catch (e) {}
-
   return function (args: {}, callback: () => void) {
+    let customers = [];
+    try {
+      customers = JSON.parse(DB.getItem('customers'));
+    } catch (e) {}
+
     this.prompt([
       {
         type: 'input',
@@ -27,10 +27,15 @@ export function handleFile(DB: any) {
             return null;
           });
           if (tmp.length < 3) return false;
-          if (!integrityCheck(tmp[0].split('-'))) {
-            this.log(`CUSTOMER_ID invalid: ${tmp[0]}, skipping ...`);
+          if (
+            !integrityCheck(tmp[0].split('-')) ||
+            !coordinateCheck(tmp[1]) ||
+            !coordinateCheck(tmp[2])
+          ) {
+            this.log(`CUSTOMER invalid: ${tmp[0]}, skipping ...`);
             return false;
           }
+
           customers.push({
             id: tmp[0],
             lat: tmp[1],
@@ -53,7 +58,7 @@ export function handleFile(DB: any) {
 
 export function clear(DB: any) {
   return function (args: {}, callback: () => void): void {
-    DB.setItem('customers', '[]');
+    DB.setItem('customers', '');
     callback();
   };
 }
@@ -64,6 +69,7 @@ export function print(DB: any) {
     try {
       customers = JSON.parse(DB.getItem('customers'));
     } catch (e) {}
+
     customers.forEach(c => {
       if (typeof c.d !== 'undefined') {
         this.log(`Client: ${c.id}, D: ${c.d}km`);
@@ -97,7 +103,7 @@ export function calc(DB: any) {
           total++;
           this.log(`${cust.id}: ${_d}km`);
         }
-        return Object.assign({}, cust, { d: _d });
+        return Object.assign(cust, { d: _d });
       });
       DB.setItem('customers', JSON.stringify(customers));
       this.log('----------------------');

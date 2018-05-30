@@ -14,3 +14,7 @@ export function integrityCheck(flag: Array<string>) {
     flag[4].length === 12
   );
 }
+
+export function coordinateCheck(coord: any) {
+  return !isNaN(coord) && typeof coord !== 'undefined' && coord !== null;
+}
