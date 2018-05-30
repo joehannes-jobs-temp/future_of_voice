@@ -10,7 +10,14 @@ export function attach(
     .action(command.action);
 }
 
-export function build(cli: any, commands: Array<{}>) {
+export function build(
+  cli: any,
+  commands: Array<{
+    symbol: string,
+    help: string,
+    action: (args: {}, callback: () => void) => void,
+  }>
+) {
   commands.forEach(cmd => attach(cli, cmd));
   return cli;
 }
