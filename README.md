@@ -16,3 +16,5 @@ johannes.neugschwentner@gmail.com
 ## Run Tests
 
 `npm start test`
+
+![Demo](assets/screencast.gif)
